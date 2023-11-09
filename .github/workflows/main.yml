@@ -17,22 +17,29 @@ jobs:
     # 暂且理解为 变量
     strategy:
       matrix:
-        node_version: ["14.X"]
-        os: [ubuntu-latest, windows-latest, macOS-latest]
+        node_version: ["14.X", "16.X"]
+        os: [ubuntu-latest]
     # 具体步骤
     steps:
       - uses: actions/checkout@v2
-      # step 名称
+      
+      # step 名称 - 1）安装和使用 Node
       - name: Use Node.js ${{ matrix.node_version }}
         # actions 包，可以理解为 node_modules 下的包
         uses: actions/setup-node@v2.5.1
         with:
           node-version: ${{ matrix.node_version }}
+          
+      # step 名称 - 2）安装 node_modules
       - name: instal deps
         # 执行的命令
         run: npm install
+        
+      # step 名称 - 3）项目构建
       - name: build app
         run: npm run build
+        
+      # step 名称 - 4）将构建包 scp 到线上服务器
       - name: copy dist file with scp
         uses: appleboy/scp-action@v0.0.1
         with:
