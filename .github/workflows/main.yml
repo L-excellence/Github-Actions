@@ -17,7 +17,7 @@ jobs:
     # 暂且理解为 变量
     strategy:
       matrix:
-        node_version: ["14.X", "16.X"]
+        node_version: ["16.X"]
         os: [ubuntu-latest]
     # 具体步骤
     steps:
@@ -41,7 +41,7 @@ jobs:
         
       # step 名称 - 4）将构建包 scp 到线上服务器
       - name: copy dist file with scp
-        uses: appleboy/scp-action@v0.0.1
+        uses: appleboy/scp-action@v0.1.4
         with:
           # 服务器 ip
           host: ${{ secrets.REMOTE_HOST }}
