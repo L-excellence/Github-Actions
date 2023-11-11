@@ -6,7 +6,9 @@ name: deploy-website
 on:
   push:
     branches:
-    - main
+      - main
+    paths:
+      - BuildLog.md
 
 # 需要执行的具体任务
 jobs:
